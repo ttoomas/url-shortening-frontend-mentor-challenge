@@ -81,7 +81,8 @@ function linkInfo(data){
 
 			const shortLink = data.result.short_link;
 			const originalLink = data.result.original_link;
-			const idShortLink = shortLink.substring(shortLink.lastIndexOf('/') + 1);
+			const shortLinkSub = shortLink.substring(shortLink.lastIndexOf('/') + 1);
+			let idShortLink = 'id' + shortLinkSub;
 
 			var apiDataLinks = `
 				<div class="link__item">
@@ -89,9 +90,11 @@ function linkInfo(data){
 					<div class="link__bx">
 						<a href="https://${shortLink}" id="${idShortLink}" class="link__item__short">${shortLink}</a>
 						<button id="button${idShortLink}" onclick="copyButton('${idShortLink}')" class="link__item__button copy">Copy</button>
-					</div>
+						</div>
 				</div>
 			`;
+			// <button id="del${idShortLink}" onclick="deleteButton('${idShortLink}')" class="link__item__button copy" style="background: red;">Delete</button>
+
 			const apiShortLink = `${data.result.short_link}`
 
 			linkContainer.insertAdjacentHTML('afterbegin', apiDataLinks);
@@ -115,6 +118,16 @@ for (let i = 0; i < localStorage.length; i++){
 	// Add margin to first shorted link
 	linkContainer.style.margin="1.5rem 0 0 0";
 }
+
+// Local Storage delete item
+// function deleteButton(){
+// 	console.log('click');
+
+// 	for (let i = 0; i < localStorage.length; i++){
+// 		const key = localStorage.key(i);
+// 		const value = localStorage.removeItem(key);
+// 	}
+// }
 
 
 // COPY TO CLIPBOARD
